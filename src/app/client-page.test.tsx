@@ -1,14 +1,59 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import ClientPage from './client-page';
 import { threads } from '../../database/seed';
-import { emails } from '@/lib/schema';
+import { emails, Email } from '@/lib/schema';
 import { db } from '@/lib/database';
 import { desc } from 'drizzle-orm';
 
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    refresh: jest.fn(),
+    replace: jest.fn(),
+    back: jest.fn(),
+    forward: jest.fn(),
+  }),
+  useSearchParams: () => ({
+    get: jest.fn(),
+  }),
+  usePathname: () => '/',
+}));
+
+global.fetch = jest.fn();
+
 describe('Home Page Client', () => {
+  const setupFetchMock = (emailData: Email[]) => {
+    (global.fetch as jest.Mock).mockImplementation((url: string) => {
+      if (url.startsWith('/api/emails')) {
+        const urlObj = new URL(url, 'http://localhost');
+        const searchTerm = urlObj.searchParams.get('search') || '';
+
+        let filtered = emailData;
+        if (searchTerm) {
+          const lowerTerm = searchTerm.toLowerCase();
+          filtered = emailData.filter(email =>
+            email.subject.toLowerCase().includes(lowerTerm) ||
+            email.from.toLowerCase().includes(lowerTerm) ||
+            email.to.toLowerCase().includes(lowerTerm) ||
+            (email.content && email.content.toLowerCase().includes(lowerTerm)),
+          );
+        }
+
+        return Promise.resolve({
+          ok: true,
+          json: async () => filtered,
+        });
+      }
+      return Promise.resolve({
+        ok: true,
+        json: async () => [],
+      });
+    });
+  };
+
   test('Shows the email list in the inbox', async () => {
-    const emailList = await db.select().from(emails).orderBy((email) => desc(email.createdAt));
-    const ui = <ClientPage emails={emailList} />;
+    const emailList = await db.select().from(emails).orderBy(desc(emails.createdAt));
+    const ui = <ClientPage emails={emailList} currentFilter="inbox"/>;
     render(ui);
 
     // Wait for the email list to load first
@@ -21,8 +66,8 @@ describe('Home Page Client', () => {
   });
 
   test('Displays the email content truncated to 30 characters', async () => {
-    const emailList = await db.select().from(emails).orderBy((email) => desc(email.createdAt));
-    const ui = <ClientPage emails={emailList} />;
+    const emailList = await db.select().from(emails).orderBy(desc(emails.createdAt));
+    const ui = <ClientPage emails={emailList} currentFilter="inbox"/>;
     render(ui);
 
     // Wait for the email list to load first
@@ -35,8 +80,8 @@ describe('Home Page Client', () => {
   });
 
   test('Displays full email content when clicking on an email', async () => {
-    const emailList = await db.select().from(emails).orderBy((email) => desc(email.createdAt));
-    const ui = <ClientPage emails={emailList} />;
+    const emailList = await db.select().from(emails).orderBy(desc(emails.createdAt));
+    const ui = <ClientPage emails={emailList} currentFilter="inbox"/>;
     render(ui);
 
     // Wait for the email list to load first
@@ -51,8 +96,10 @@ describe('Home Page Client', () => {
   });
 
   test('The search feature works as expected', async () => {
-    const emailList = await db.select().from(emails).orderBy((email) => desc(email.createdAt));
-    const ui = <ClientPage emails={emailList} />;
+    const emailList = await db.select().from(emails).orderBy(desc(emails.createdAt));
+    setupFetchMock(emailList);
+
+    const ui = <ClientPage emails={emailList} currentFilter="inbox"/>;
     render(ui);
 
     // Wait for the email list to load first
@@ -84,7 +131,9 @@ describe('Home Page Client', () => {
 
   test('The search feature is debounced and works as expected', async () => {
     const emailList = await db.select().from(emails).orderBy((email) => desc(email.createdAt));
-    const ui = <ClientPage emails={emailList} />;
+    setupFetchMock(emailList);
+
+    const ui = <ClientPage emails={emailList} currentFilter="inbox"/>;
     render(ui);
 
     // Wait for the email list to load first

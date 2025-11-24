@@ -13,3 +13,6 @@ junit-reports/
 
 # SQLite database
 sqlite.db
+sqlite.test.db
+
+.idea

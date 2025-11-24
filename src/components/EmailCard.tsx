@@ -6,14 +6,13 @@ import {
   Box,
   Chip,
   Avatar,
-  Divider,
   IconButton,
+  Tooltip,
 } from '@mui/material';
 import {
   Star,
-  StarBorder,
-  MarkEmailRead,
-  MarkEmailUnread,
+  DeleteOutline,
+  RestoreFromTrash,
 } from '@mui/icons-material';
 
 interface EmailProps {
@@ -27,9 +26,14 @@ interface EmailProps {
   isImportant: boolean;
   createdAt: Date;
   updatedAt: Date;
+  isDeleted?: boolean;
 };
 
-const EmailCard: React.FC<{ email: EmailProps }> = ({ email }) => {
+const EmailCard: React.FC<{
+  email: EmailProps,
+  onDelete: (id: number) => void;
+  onRestore?: (id: number) => void;
+}> = ({ email, onDelete, onRestore }) => {
   const getInitials = (name: string) => {
     return name.split('@')[0].substring(0, 2).toUpperCase();
   };
@@ -43,6 +47,18 @@ const EmailCard: React.FC<{ email: EmailProps }> = ({ email }) => {
       return emailDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     } else {
       return emailDate.toLocaleDateString();
+    }
+  };
+
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onDelete(email.id);
+  };
+
+  const handleRestoreClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onRestore) {
+      onRestore(email.id);
     }
   };
 
@@ -60,6 +76,9 @@ const EmailCard: React.FC<{ email: EmailProps }> = ({ email }) => {
         '&:hover': {
           boxShadow: 2,
           backgroundColor: 'action.hover',
+          '& .action-button': {
+            opacity: 1,
+          },
         },
       }}
     >
@@ -113,23 +132,44 @@ const EmailCard: React.FC<{ email: EmailProps }> = ({ email }) => {
             </Typography>
           </Box>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 0.5 }}>
             <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
               {formatDate(email.createdAt)}
             </Typography>
-            <Box sx={{ display: 'flex', gap: 0.25 }}>
-              {email.isImportant && (
-                <Star sx={{ color: 'warning.main', fontSize: '1rem' }} />
-              )}
-              {!email.isRead && (
-                <Box sx={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: '50%',
-                  bgcolor: 'primary.main',
-                }} />
-              )}
-            </Box>
+
+            {email.isDeleted ? (
+              <Tooltip title="Restore">
+                <IconButton
+                  size="small"
+                  onClick={handleRestoreClick}
+                  className="action-button"
+                  sx={{
+                    padding: 0.5,
+                    opacity: 0,
+                    transition: 'opacity 0.2s',
+                    '&:hover': { color: 'success.main' },
+                  }}
+                >
+                  <RestoreFromTrash fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip title="Move to Trash">
+                <IconButton
+                  size="small"
+                  onClick={handleDeleteClick}
+                  className="action-button"
+                  sx={{
+                    padding: 0.5,
+                    opacity: 0,
+                    transition: 'opacity 0.2s',
+                    '&:hover': { color: 'error.main' },
+                  }}
+                >
+                  <DeleteOutline fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            )}
           </Box>
         </Box>
 

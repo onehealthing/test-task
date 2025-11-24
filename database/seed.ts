@@ -16,6 +16,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-01'),
     updatedAt: new Date('2025-01-01'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 2,
@@ -29,6 +32,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-02'),
     updatedAt: new Date('2025-01-02'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 3,
@@ -42,6 +48,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-03'),
     updatedAt: new Date('2025-01-03'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 4,
@@ -55,6 +64,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-04'),
     updatedAt: new Date('2025-01-04'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 5,
@@ -68,6 +80,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-05'),
     updatedAt: new Date('2025-01-05'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
 
   // Thread 2: Client Communication (4 emails)
@@ -83,6 +98,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-06'),
     updatedAt: new Date('2025-01-06'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 7,
@@ -96,6 +114,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-07'),
     updatedAt: new Date('2025-01-07'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 8,
@@ -109,6 +130,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-08'),
     updatedAt: new Date('2025-01-08'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 9,
@@ -122,6 +146,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-09'),
     updatedAt: new Date('2025-01-09'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
 
   // Thread 3: Technical Discussion (4 emails)
@@ -137,6 +164,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-10'),
     updatedAt: new Date('2025-01-10'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 11,
@@ -150,6 +180,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-11'),
     updatedAt: new Date('2025-01-11'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 12,
@@ -163,6 +196,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-12'),
     updatedAt: new Date('2025-01-12'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 13,
@@ -176,6 +212,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-13'),
     updatedAt: new Date('2025-01-13'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
 
   // Thread 4: Marketing Campaign (3 emails)
@@ -191,6 +230,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-14'),
     updatedAt: new Date('2025-01-14'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 15,
@@ -204,6 +246,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-15'),
     updatedAt: new Date('2025-01-15'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 16,
@@ -217,6 +262,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-16'),
     updatedAt: new Date('2025-01-16'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
 
   // Thread 5: Personal Messages (4 emails)
@@ -232,6 +280,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-17'),
     updatedAt: new Date('2025-01-17'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 18,
@@ -245,6 +296,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-18'),
     updatedAt: new Date('2025-01-18'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 19,
@@ -258,6 +312,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-19'),
     updatedAt: new Date('2025-01-19'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
   {
     id: 20,
@@ -271,6 +328,9 @@ export const emailData: Email[] = [
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-20'),
     updatedAt: new Date('2025-01-20'),
+    cc: 'team_cc@company.com',
+    bcc: 'team_bcc@company.com',
+    isDeleted: false,
   },
 ];
 

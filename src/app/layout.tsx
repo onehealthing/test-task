@@ -1,3 +1,5 @@
+import React from 'react';
+import Link from 'next/link'; // Import Next.js Link
 import ThemeProvider from '../components/ThemeProvider';
 import { Box, Divider, MenuList, MenuItem, ListItemText, ListItemIcon, Typography, Paper } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
@@ -52,7 +54,11 @@ export default function RootLayout({
               {/* Navigation */}
               <Box sx={{ flex: 1, p: 1 }}>
                 <MenuList sx={{ p: 0 }}>
-                  <MenuItem sx={{ borderRadius: 2, mb: 0.5 }}>
+                  <MenuItem
+                    component={Link}
+                    href="/?filter=inbox"
+                    sx={{ borderRadius: 2, mb: 0.5 }}
+                  >
                     <ListItemIcon sx={{ minWidth: 40 }}>
                       <InboxIcon fontSize="small" />
                     </ListItemIcon>
@@ -62,9 +68,13 @@ export default function RootLayout({
                     />
                   </MenuItem>
 
-                  <MenuItem sx={{ borderRadius: 2, mb: 0.5 }}>
+                  <MenuItem
+                    component={Link}
+                    href="/?filter=important"
+                    sx={{ borderRadius: 2, mb: 0.5 }}
+                  >
                     <ListItemIcon sx={{ minWidth: 40 }}>
-                      <StarIcon fontSize="small" />
+                      <StarIcon fontSize="small"/>
                     </ListItemIcon>
                     <ListItemText
                       primary="Important"
@@ -72,7 +82,11 @@ export default function RootLayout({
                     />
                   </MenuItem>
 
-                  <MenuItem sx={{ borderRadius: 2, mb: 0.5 }}>
+                  <MenuItem
+                    component={Link}
+                    href="/?filter=sent"
+                    sx={{ borderRadius: 2, mb: 0.5 }}
+                  >
                     <ListItemIcon sx={{ minWidth: 40 }}>
                       <SendIcon fontSize="small" />
                     </ListItemIcon>
@@ -84,7 +98,11 @@ export default function RootLayout({
 
                   <Divider sx={{ my: 2 }} />
 
-                  <MenuItem sx={{ borderRadius: 2, mb: 0.5 }}>
+                  <MenuItem
+                    component={Link}
+                    href="/?filter=trash"
+                    sx={{ borderRadius: 2, mb: 0.5 }}
+                  >
                     <ListItemIcon sx={{ minWidth: 40 }}>
                       <DeleteIcon fontSize="small" />
                     </ListItemIcon>
